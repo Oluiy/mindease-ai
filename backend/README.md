@@ -45,7 +45,6 @@ A comprehensive Node.js backend for a mental health chatbot application offering
    ```env
    MONGODB_URI=mongodb://127.0.0.1:27017/mental_health_chatbot
    JWT_SECRET=mental_health_chatbot_super_secret_jwt_key_2024_production_ready
-   GEMINI_API_KEY=AIzaSyD47L77r52oFo_kxyxpILKp9A4nxEtxCY0
    PORT=3001
    NODE_ENV=development
    FRONTEND_URL=http://localhost:3000
