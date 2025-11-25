@@ -1,0 +1,23 @@
+.navbar {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-title {
+    padding: 10px;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.navbar-subtitle {
+    padding-right: 10px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #6b7280;
+}

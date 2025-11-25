@@ -1,0 +1,44 @@
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.chat-scroll-area {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.chat-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
