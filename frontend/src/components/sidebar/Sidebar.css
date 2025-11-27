@@ -32,6 +32,27 @@
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 85vw;
+    max-width: 300px;
+  }
+
+  .sidebar-content {
+    padding: 1.5rem;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .sidebar-item {
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+  }
+}
+
 .sidebar-open {
   transform: translateX(0);
 }

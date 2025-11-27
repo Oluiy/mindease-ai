@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <Sidebar />
-      <h1 className="navbar-title">MindEase AI</h1>
+      <h1 className="navbar-title">MindEase</h1>
       <div className="navbar-subtitle">You're not alone.</div>
     </nav>
   );

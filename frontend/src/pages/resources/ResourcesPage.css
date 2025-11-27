@@ -99,13 +99,14 @@
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
 }
 
 .resource-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .resource-type {
@@ -181,4 +182,135 @@
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* Crisis Section */
+.crisis-section {
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.crisis-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: #991b1b;
+}
+
+.crisis-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.hotlines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.hotline-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #dc2626;
+}
+
+.hotline-card h3 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.hotline-card p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.hotline-number {
+  font-weight: 700;
+  color: #dc2626;
+  font-size: 1.125rem;
+}
+
+/* Recommended Section */
+.recommended-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.star-icon {
+  color: #eab308;
+  fill: #eab308;
+}
+
+.resource-card.recommended {
+  border: 2px solid #eab308;
+  position: relative;
+}
+
+.resource-card.recommended::after {
+  content: "Recommended";
+  position: absolute;
+  top: -10px;
+  right: 1rem;
+  background: #eab308;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .resources-content {
+    padding: 1rem;
+  }
+
+  .resources-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .resources-grid, 
+  .hotlines-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .search-bar {
+    margin-bottom: 1rem;
+  }
+
+  .category-filters {
+    gap: 0.5rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .category-btn {
+    white-space: nowrap;
+    padding: 0.4rem 1rem;
+    font-size: 0.875rem;
+  }
 }
