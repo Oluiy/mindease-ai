@@ -119,12 +119,15 @@ resourceSchema.index({ language: 1 });
 resourceSchema.index({ tags: 1 });
 resourceSchema.index({ priority: -1 });
 
-// Text search index
+// Text search index (with language support)
 resourceSchema.index({
   title: 'text',
   description: 'text',
   content: 'text',
   tags: 'text'
+}, {
+  default_language: 'english',
+  language_override: 'language'
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);
