@@ -104,31 +104,52 @@ initializeSocket(io);
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => {
-  logger.info('Connected to MongoDB');
-})
-.catch((error) => {
-  logger.error('MongoDB connection error:', error);
-  process.exit(1);
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) {
+    return;
+  }
+  
+  try {
+    await mongoose.connect(process.env.MONGODB_URI);
+    isConnected = true;
+    logger.info('Connected to MongoDB');
+  } catch (error) {
+    logger.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
+
+// Connect to database before handling requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    res.status(500).json({ error: 'Database connection failed' });
+  }
 });
 
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  logger.info('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    mongoose.connection.close(false, () => {
-      logger.info('Process terminated');
-      process.exit(0);
+// Only start server if not in serverless environment
+if (process.env.VERCEL !== '1') {
+  const PORT = process.env.PORT || 3000;
+  
+  server.listen(PORT, () => {
+    logger.info(`Server running on port ${PORT}`);
+    logger.info(`Environment: ${process.env.NODE_ENV}`);
+  });
+
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    logger.info('SIGTERM received, shutting down gracefully');
+    server.close(() => {
+      mongoose.connection.close(false, () => {
+        logger.info('Process terminated');
+        process.exit(0);
+      });
     });
   });
-});
+}
 
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`);
-  logger.info(`Environment: ${process.env.NODE_ENV}`);
-});
-
-module.exports = { app, server, io };
+module.exports = app;
