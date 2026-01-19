@@ -6,8 +6,6 @@ const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss');
-const http = require('http');
-const socketIo = require('socket.io');
 require('dotenv').config();
 
 const authRoutes = require('./routes/auth');
@@ -19,17 +17,8 @@ const crisisRoutes = require('./routes/crisis');
 const voiceRoutes = require('./routes/voice');
 
 const { errorHandler } = require('./middleware/errorHandler');
-const { logger } = require('./utils/logger');
-const { initializeSocket } = require('./services/socketService');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }
-});
 
 // Security middleware
 app.use(helmet());
@@ -97,9 +86,6 @@ app.use('/api/resources', resourceRoutes);
 app.use('/api/crisis', crisisRoutes);
 app.use('/api/voice', voiceRoutes);
 
-// Initialize Socket.IO
-initializeSocket(io);
-
 // Error handling middleware
 app.use(errorHandler);
 
@@ -114,9 +100,9 @@ const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
     isConnected = true;
-    logger.info('Connected to MongoDB');
+    console.log('Connected to MongoDB');
   } catch (error) {
-    logger.error('MongoDB connection error:', error);
+    console.error('MongoDB connection error:', error);
     throw error;
   }
 };
@@ -135,19 +121,17 @@ app.use(async (req, res, next) => {
 if (process.env.VERCEL !== '1') {
   const PORT = process.env.PORT || 3000;
   
-  server.listen(PORT, () => {
-    logger.info(`Server running on port ${PORT}`);
-    logger.info(`Environment: ${process.env.NODE_ENV}`);
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
   });
 
   // Graceful shutdown
   process.on('SIGTERM', () => {
-    logger.info('SIGTERM received, shutting down gracefully');
-    server.close(() => {
-      mongoose.connection.close(false, () => {
-        logger.info('Process terminated');
-        process.exit(0);
-      });
+    console.log('SIGTERM received, shutting down gracefully');
+    mongoose.connection.close(false, () => {
+      console.log('Process terminated');
+      process.exit(0);
     });
   });
 }
