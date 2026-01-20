@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, X, Home, MessageSquare, BookOpen, User } from "lucide-react";
+import { Menu, X, Home, MessageSquare, BookOpen, User, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import './Sidebar.css';
 
@@ -46,6 +46,11 @@ export default function Sidebar() {
               icon={<BookOpen size={24} />} 
               label="Resources" 
               onClick={() => handleNavigation('/resources')} 
+            />
+            <SidebarItem 
+              icon={<Heart size={24} />} 
+              label="Affirmations" 
+              onClick={() => handleNavigation('/affirmations')} 
             />
             <SidebarItem 
               icon={<User size={24} />} 

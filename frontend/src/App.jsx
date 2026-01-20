@@ -6,6 +6,7 @@ import SignupPage from "./pages/signup/SignupPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import HomePage from "./pages/home/HomePage";
 import ResourcesPage from "./pages/resources/ResourcesPage";
+import AffirmationsPage from "./pages/affirmations/AffirmationsPage";
 
 const client = new QueryClient();
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/affirmations" element={<AffirmationsPage />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
